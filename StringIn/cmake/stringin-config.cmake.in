@@ -1,0 +1,54 @@
+# StringIn CMake config file
+#
+# This file sets the following variables:
+# StringIn_FOUND - Always TRUE.
+# StringIn_INCLUDE_DIRS - Directories containing the StringIn include files.
+# StringIn_IDL_DIRS - Directories containing the StringIn IDL files.
+# StringIn_LIBRARIES - Libraries needed to use StringIn.
+# StringIn_DEFINITIONS - Compiler flags for StringIn.
+# StringIn_VERSION - The version of StringIn found.
+# StringIn_VERSION_MAJOR - The major version of StringIn found.
+# StringIn_VERSION_MINOR - The minor version of StringIn found.
+# StringIn_VERSION_REVISION - The revision version of StringIn found.
+# StringIn_VERSION_CANDIDATE - The candidate version of StringIn found.
+
+message(STATUS "Found StringIn-@PROJECT_VERSION@")
+set(StringIn_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(StringIn_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(StringIn_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(StringIn_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(StringIn_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(StringIn_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(StringIn_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(StringIn_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(StringIn_VERSION @PROJECT_VERSION@)
+set(StringIn_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(StringIn_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(StringIn_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(StringIn_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
