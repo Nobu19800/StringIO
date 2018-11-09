@@ -178,7 +178,7 @@ class StringOut(OpenRTM_aist.DataFlowComponentBase):
 	#
 	#
 	def onExecute(self, ec_id):
-		print("Please input number: ",end="")
+		print("Please input: ",end="")
 		self._d_out.data = sys.stdin.readline()
 		self._outOut.write()
 		return RTC.RTC_OK
